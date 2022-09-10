@@ -7,7 +7,8 @@
 
 By default you will be testing in the Node.js environment. For a web app you can specify that you want to test in a browser like environment using jsdom.
 
-If you've not set this up you may get the following error when running your test.
+If you've not set this up you may get the following error when running your test. For me this has been a particular problem when the file I'm testing is referencing html in the dom. 
+
 ```
 ReferenceError: document is not defined
 ```
@@ -35,6 +36,20 @@ We can make this a little slicker by adding it as a script to our package.json f
     "test": "jest --env=jsdom",
   },
 
+```
+
+### Including our HTML in the test
+
+Once we have global jsdom then we can then reference html within the class or module that we are testing. <br>
+
+Within our test we will then be creating an instance of that class in this file, which means that we can read our html file using fs in the test and our test will use the html we imported to test. 
+
+for example:
+
+```
+const fs = require("fs");
+const html = fs.readFileSync("./index.html");
+document.documentElement.innerHTML = html;
 ```
 
 ### Accessing files in your test
@@ -66,7 +81,7 @@ module.exports = config;
 
 ### setupFilesAfterEnv
 
-key value pair in our jest.config.js file 
+Key value pair in our config object within our jest.config.js file.
 
 `setupFilesAfterEnv: ["<rootDir>/tests/setupTests.js"]`
 
