@@ -73,12 +73,14 @@ key value pair in our jest.config.js file
 The array contains files to execute before each test. In the above example setupTests.js contains the following placeholder:
 
 ```
+//<rootDir>/tests/setupTests.js
+
 beforeEach(() => {
-  //   console.log("before each");
+     console.log("before each");
 });
 
 afterEach(() => {
-  //   console.log("after each");
+     console.log("after each");
 });
 
 ```
