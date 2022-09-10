@@ -78,6 +78,14 @@ document.querySelector("#id").dispatchEvent(
         );
 ```
 
+### testing selectstart and other generic events
+
+Similar to above but:
+
+```
+document.dispatchEvent(new Event('selectstart'));
+```
+
 ### config
 
 set up a jest.config.js file and create an object within which you place configuration
