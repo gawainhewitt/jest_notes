@@ -1,6 +1,6 @@
 # Jest Notes
 
-[Jest]("https://jestjs.io/docs/getting-started") is testing library for JavaScript. These are my personal notes to help me as I use it. Maybe they can help you too.
+[Jest](https://jestjs.io/docs/getting-started) is testing library for JavaScript. These are my personal notes to help me as I use it. Maybe they can help you too.
 
 
 ### Testing environment
