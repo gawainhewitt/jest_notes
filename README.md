@@ -64,6 +64,20 @@ You need to require it before you can use it.
 const fs = require('fs');
 ```
 
+### Testing mouseenter (and mouseover)
+
+If we are testing a button click we can just use `document.querySelector("#id").click();` to simulate a mouse click in JS. For mouseenter and mouseover and possibly others this is not possible. Instead we have to use `dispatchEvent` as follows:
+
+```
+document.querySelector("#id").dispatchEvent(
+          new MouseEvent("mouseenter", {
+            view: window,
+            bubbles: true,
+            cancelable: true
+          })
+        );
+```
+
 ### config
 
 set up a jest.config.js file and create an object within which you place configuration
