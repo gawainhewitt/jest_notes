@@ -1,3 +1,54 @@
+# Jest Notes
+
+[Jest]("https://jestjs.io/docs/getting-started") is testing library for JavaScript. These are my personal notes to help me as I use it. Maybe they can help you too.
+
+
+### Testing environment
+
+By default you will be testing in the Node.js environment. For a web app you can specify that you want to test in a browser like environment using jsdom.
+
+If you've not set this up you may get the following error when running your test.
+```
+ReferenceError: document is not defined
+```
+
+To to use jsdom environment in jest you will need to install it first using `npm i jest-environment-jsdom`
+
+This docblock can be added at the top of a test file to tell that file to use jsdom. 
+
+```
+/**
+ * @jest-environment jsdom
+ */
+```
+
+This will not transfer this setting to the tested file however. To do that we will need to run jest with the environment set to jsdom with this command 
+
+```
+jest --env=jsdom
+```
+
+We can make this a little slicker by adding it as a script to our package.json file and then running our tests using the command `npm test`.
+
+```
+"scripts": {
+    "test": "jest --env=jsdom",
+  },
+
+```
+ ### Accessing files in your test
+
+ Use the fs module to access files. 
+
+ We use this to load html for example for behavioural tests
+
+ You need to require it before you can use it.
+
+ ```
+ const fs = require('fs');
+ ```
+
+
 ### Testing Api Calls
 
 This matches the code in JS_notes.md on the same subject
@@ -44,26 +95,3 @@ describe('notesApi class', () => {
 
 ```
 
-### Testing environment
-
-By default you will be testing in the Node.js environment. For a web app you can specify that you want to test in a browser like environment using the the following docblock.
-
-To to use @jest environment you will need to install it first using `npm i jest-environment-jsdom`
-
-```
-/**
- * @jest-environment jsdom
- */
- ```
-
- ### Accessing files in your test
-
- Use the fs module to access files. 
-
- We use this to load html for example for behavioural tests
-
- You need to require it before you can use it.
-
- ```
- const fs = require('fs');
- ```
