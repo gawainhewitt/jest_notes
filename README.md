@@ -36,18 +36,52 @@ We can make this a little slicker by adding it as a script to our package.json f
   },
 
 ```
- ### Accessing files in your test
 
- Use the fs module to access files. 
+### Accessing files in your test
 
- We use this to load html for example for behavioural tests
+Use the fs module to access files. 
 
- You need to require it before you can use it.
+We use this to load html for example for behavioural tests
 
- ```
- const fs = require('fs');
- ```
+You need to require it before you can use it.
 
+```
+const fs = require('fs');
+```
+
+### config
+
+set up a jest.config.js file and create an object within which you place configuration
+
+```
+const config = {
+  verbose: true,
+  collectCoverage: true,
+  setupFilesAfterEnv: ["<rootDir>/tests/setupTests.js"]
+};
+
+module.exports = config;
+
+```
+
+### setupFilesAfterEnv
+
+key value pair in our jest.config.js file 
+
+`setupFilesAfterEnv: ["<rootDir>/tests/setupTests.js"]`
+
+The array contains files to execute before each test. In the above example setupTests.js contains the following placeholder:
+
+```
+beforeEach(() => {
+  //   console.log("before each");
+});
+
+afterEach(() => {
+  //   console.log("after each");
+});
+
+```
 
 ### Testing Api Calls
 
