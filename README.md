@@ -86,6 +86,21 @@ Similar to above but:
 document.dispatchEvent(new Event('selectstart'));
 ```
 
+### using modules (import) in tests
+
+I am still learning about this - but this is where I am at the moment. I am trying to use the `import` syntax so that I can then use jest.mock('ClassName') - but I was getting the error `SyntaxError: Cannot use import statement outside a module`
+
+This is how I have fixed it this time, suffice to say I would still like to learn a lot more and better understand what is going on here. 
+
+Firstly install a version of Babel called [Babel/preset-env]('https://babeljs.io/docs/en/babel-preset-env').
+
+```npm i -D @babel/preset-env```
+
+Then create a `babel.config.js` file which contains the following:
+
+``` module.exports = {presets: ['@babel/preset-env']} ```
+
+
 ### config
 
 set up a jest.config.js file and create an object within which you place configuration
