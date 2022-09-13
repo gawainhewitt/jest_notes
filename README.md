@@ -86,6 +86,15 @@ Similar to above but:
 document.dispatchEvent(new Event('selectstart'));
 ```
 
+### testing touch
+
+Similar again to above but:
+```
+document
+      .querySelector("#middle-box")
+      .dispatchEvent(new TouchEvent("touchmove"));
+```
+
 ### using modules (import) in tests
 
 I am still learning about this - but this is where I am at the moment. I am trying to use the `import` syntax so that I can then use jest.mock('ClassName') - but I was getting the error `SyntaxError: Cannot use import statement outside a module`
