@@ -95,6 +95,61 @@ document
       .dispatchEvent(new TouchEvent("touchmove"));
 ```
 
+### mocking classes
+
+For automatic mocking of classes it doesn't matter how you import the class - npm `require` or modules `import` the behaviour is essentially the same. <br>
+
+Start by importing the classes as usual
+
+```
+const EventBinders = require("../../eventBinders");
+const EventHandlers = require("../../eventHandlers");
+const HarpSoundControl = require("../../harpSoundControl");
+```
+
+Then use following syntax to declare the ones you want to automatically mock as mocks 
+
+```
+jest.mock("../../harpSoundControl");
+jest.mock("../../eventBinders");
+```
+
+Use a beforeEach block to clear the mocks between tests:
+
+
+```
+beforeEach(() => {
+  EventBinders.mockClear();
+  HarpSoundControl.mockClear();
+});
+```
+
+The following test checks that injected class instances are instances of the mocked classes:
+
+```
+test("constructor sets up class instances correctly", () => {
+  const harpSoundControl = new HarpSoundControl();
+  const eventBinders = new EventBinders();
+  const eventHandlers = new EventHandlers(eventBinders, harpSoundControl);
+
+  expect(eventHandlers.harpSoundControl).toBeInstanceOf(HarpSoundControl);
+  expect(eventHandlers.eventBinders).toBeInstanceOf(EventBinders);
+});
+```
+
+In this test I am looking at a specific instance the array of mock instances by calling `HarpSoundControl.mock.instances[0]`. I can then check that a method has been called on this.
+
+it("constructor calls setUpSampler", () => {
+  const harpSoundControl = new HarpSoundControl();
+  const eventBinders = new EventBinders();
+  const eventHandlers = new EventHandlers(eventBinders, harpSoundControl);
+
+  const mockHarpSoundControlInstance = HarpSoundControl.mock.instances[0];
+
+  expect(mockHarpSoundControlInstance.setUpSampler).toHaveBeenCalled();
+});
+
+
 ### using modules (import) in tests
 
 I am still learning about this - but this is where I am at the moment. I am trying to use the `import` syntax so that I can then use jest.mock('ClassName') - but I was getting the error `SyntaxError: Cannot use import statement outside a module`
