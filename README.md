@@ -247,3 +247,7 @@ describe('notesApi class', () => {
 
 ```
 
+### Limitations
+
+can't find a way to test further as `document.elementFromPoint` ends up being called - and there is no viewport or layout in JSDOM, so this feature is not implemented and therefore I can't test. perhaps if i break my classes down more I could find a way to get more coverage?
+
